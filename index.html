@@ -666,12 +666,12 @@
 
 
 
-                #main-newstand-animation a:first-of-type {
+                #main-newstand-animation>a:first-of-type {
                     vertical-align: top;
                     line-height: 26px;
                 }
 
-                #main-newstand-animation a:first-of-type::after {
+                #main-newstand-animation>a:first-of-type::after {
                     content: '';
                     display: inline-block;
                     width: 3px;
@@ -747,12 +747,61 @@
                     height: 12px;
                 }
 
-                #main-newstand-animation a:last-of-type {
-                    text-overflow: ellipsis;
+                @keyframes newsAnimation {
+                    0% {
+                        /* 처음에는 가만히 있음 */
+                        transform: translateY(0);
+                    }
+
+                    /* 1초(5초의 1/5)동안 0에서 0으로 간다 : 안움직인다 */
+                    20% {
+                        transform: translateY(0);
+                    }
+
+                    40% {
+                        /* 26px */
+                        transform: translateY(-33px);
+                    }
+
+                    60% {
+                        transform: translateY(-33px);
+                    }
+
+                    80% {
+                        transform: translateY(-66px);
+                    }
+
+                    80.001% {
+                        transform: translateY(33px);
+                    }
+
+                    100% {
+                        transform: translateY(0);
+                    }
+                }
+
+                #main-newstand-animation-target {
                     width: 400px;
-                    white-space: nowrap;
                     display: inline-block;
+                    text-align: left;
+                    /* 자기범위에서 넘치는것을 숨겨줌 */
                     overflow: hidden;
+                    /* 웹사이트 로딩되는 3초뒤에 애니메이션 시작 */
+                }
+
+                #main-newstand-animation-target>div {
+                    animation: newsAnimation 5s 1s infinite;
+                }
+
+                #main-newstand-animation-target a {
+                    text-overflow: ellipsis;
+                    /* width까지 다 있어야 ellipsis가 됨*/
+
+                    width: 400px;
+                    display: inline-block;
+                    white-space: nowrap;
+                    overflow: hidden;
+
                 }
 
                 #main-newstand-gray .right {
@@ -1130,7 +1179,13 @@
                                     <a href="#">전체언론사</a>
                                     <div id="main-newstand-animation">
                                         <a href="#">연합뉴스</a>
-                                        <a href="#">美정부, SK하이닉스에 6천600억원 보조금 지급 확정(종합2보)</a>
+                                        <div id="main-newstand-animation-target">
+                                            <div>
+                                                <a href="#">美정부, SK하이닉스에 6천600억원 보조금 지급 확정(종합2보)</a>
+                                                <a href="#">[그래픽] 5대 반도체 제조업체 미국 내 설비투자 보조금 지급 규모</a>
+                                                <a href="#">네이버 크림, 간편결제 자회사 '크림페이' 설립</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="right">
